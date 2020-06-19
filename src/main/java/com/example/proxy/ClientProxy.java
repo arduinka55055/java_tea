@@ -1,8 +1,7 @@
 package com.example.proxy;
 
 
-import com.example.teamod.teamod.FluidsRegister;
-import com.example.teamod.teamod.ItemsRegistry;
+import com.example.teamod.registers.*;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

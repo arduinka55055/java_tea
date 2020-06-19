@@ -5,11 +5,11 @@
         "transform": "forge:default-item"
     },
     "variants": {
-        "oil": [{
-            "custom": { "fluid": "oil" }
+        "teafluid": [{
+            "custom": { "fluid": "teafluid" }
         }],
-        "milk": [{
-            "custom": { "fluid": "milk" }
+        "coldteafluid": [{
+            "custom": { "fluid": "coldteafluid" }
         }]
     }
  }

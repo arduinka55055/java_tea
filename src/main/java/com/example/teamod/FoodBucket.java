@@ -5,7 +5,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -24,14 +23,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class FoodBucket extends ItemFood {/* Just copy-paste official code with bucket, Pineapple apple pen */
+
+public class FoodBucket extends ItemFood {/* Just copy-paste official code with bucket, like Pineapple apple pen */
     private final Block containedBlock;
 
     public FoodBucket(int amount, float saturation, boolean isWolfFood, Block containedBlockIn) {
         super(amount, saturation, isWolfFood);
-        this.maxStackSize = 1;
         this.containedBlock = containedBlockIn;
-        this.setCreativeTab(CreativeTabs.MISC);
+        this.maxStackSize = 1;
     }
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
