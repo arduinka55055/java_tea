@@ -3,7 +3,6 @@ package com.example.teamod;
 import javax.annotation.Nullable;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -22,13 +20,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class FoodBucket extends ItemFood {
-    /** field for checking if the bucket has been filled. */
+public class FoodBucket extends ItemFood {/* Just copy-paste official code with bucket, Pineapple apple pen */
     private final Block containedBlock;
 
     public FoodBucket(int amount, float saturation, boolean isWolfFood, Block containedBlockIn) {
@@ -38,28 +34,20 @@ public class FoodBucket extends ItemFood {
         this.setCreativeTab(CreativeTabs.MISC);
     }
 
-    /**
-     * Called when the equipped item is right clicked.
-     */
-
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         boolean flag = this.containedBlock == Blocks.AIR;
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, flag);
-        // ActionResult<ItemStack> ret =
-        // net.minecraftforge.event.ForgeEventFactory.onBucketUse(playerIn, worldIn,
-        // itemstack, raytraceresult);
 
-        if (raytraceresult == null) {
+        if (playerIn.canEat(false) && !playerIn.isSneaking()) {
+            playerIn.setActiveHand(handIn);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+        }
+        else if(raytraceresult != null){
 
-            if (playerIn.canEat(false)) {
-                playerIn.setActiveHand(handIn);
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+            if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
+                return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
             }
-            return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-        } else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK) {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
-        } else {
             BlockPos blockpos = raytraceresult.getBlockPos();
 
             if (worldIn.isBlockModifiable(playerIn, blockpos)) {
@@ -67,8 +55,8 @@ public class FoodBucket extends ItemFood {
                 BlockPos blockpos1 = flag1 && raytraceresult.sideHit == EnumFacing.UP ? blockpos
                         : blockpos.offset(raytraceresult.sideHit);
 
-                if (this.tryPlaceContainedLiquid(playerIn, worldIn, blockpos1) && 
-                        playerIn.canPlayerEdit(blockpos1, raytraceresult.sideHit, itemstack)) {
+                if (this.tryPlaceContainedLiquid(playerIn, worldIn, blockpos1)
+                        && playerIn.canPlayerEdit(blockpos1, raytraceresult.sideHit, itemstack)) {
 
                     if (playerIn instanceof EntityPlayerMP) {
                         CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) playerIn, blockpos1, itemstack);
@@ -81,8 +69,11 @@ public class FoodBucket extends ItemFood {
                 }
             }
         }
+               
         return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
     }
+
+
 
     public boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
         if (this.containedBlock != Blocks.AIR) {
@@ -91,7 +82,7 @@ public class FoodBucket extends ItemFood {
             boolean flag = !material.isSolid();
             boolean flag1 = iblockstate.getBlock().isReplaceable(worldIn, posIn);
 
-            if (worldIn.isAirBlock(posIn) || ( flag && flag1)){
+            if (worldIn.isAirBlock(posIn) || (flag && flag1)) {
                 if (worldIn.provider.doesWaterVaporize()) {
                     int l = posIn.getX();
                     int i = posIn.getY();
