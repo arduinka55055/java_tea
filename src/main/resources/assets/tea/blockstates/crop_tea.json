@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cross"
+    },
+    "variants": {
+        "age": { "0": { "textures": { "cross": "tea:blocks/tea/stage_0" }},
+                 "1": { "textures": { "cross": "tea:blocks/tea/stage_1" }},
+                 "2": { "textures": { "cross": "tea:blocks/tea/stage_2" }},
+                 "3": { "textures": { "cross": "tea:blocks/tea/stage_3" }},
+                 "4": { "textures": { "cross": "tea:blocks/tea/stage_4" }},
+                 "5": { "textures": { "cross": "tea:blocks/tea/stage_5" }},
+                 "6": { "textures": { "cross": "tea:blocks/tea/stage_6" }},
+                 "7": { "textures": { "cross": "tea:blocks/tea/stage_7" }}
+        }
+    }
+}
