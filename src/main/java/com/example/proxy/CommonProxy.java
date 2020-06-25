@@ -29,15 +29,15 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent event)
     {
-        CraftingRegister.registerRecipes("cold_tea_bucket");
+        //CraftingRegister.registerRecipes("cold_tea_bucket");
 
-        /*Ingredient[] ingredientlist= new Ingredient[2];
+        Ingredient[] ingredientlist= new Ingredient[2];
         Item fuckwaterbucket = Items.LAVA_BUCKET;
         fuckwaterbucket.setContainerItem(null);
         ingredientlist[0] = Ingredient.fromItem(fuckwaterbucket);
         ingredientlist[1] = Ingredient.fromItem(ItemsRegistry.TEA);
         GameRegistry.addShapelessRecipe(new ResourceLocation(teamod.MODID),null, new ItemStack(ItemsRegistry.COLD_TEA_BUCKET,1),ingredientlist);
-        */
+        
         
         GameRegistry.addSmelting(ItemsRegistry.COLD_TEA_BUCKET, new ItemStack(ItemsRegistry.TEA_BUCKET), (float) 1.0);
     }

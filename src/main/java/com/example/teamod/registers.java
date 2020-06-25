@@ -65,8 +65,8 @@ public class registers {
         private static void setBlockRegister(final Block block) {
 
             ForgeRegistries.BLOCKS.register(block);
-            // ForgeRegistries.ITEMS.register(new
-            //        ItemBlock(block).setRegistryName(block.getRegistryName()));
+            ForgeRegistries.ITEMS.register(new
+                    ItemBlock(block).setRegistryName(block.getRegistryName()));
         }
     }
 
