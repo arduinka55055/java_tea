@@ -32,7 +32,7 @@ public class CommonProxy
         //CraftingRegister.registerRecipes("cold_tea_bucket");
 
         Ingredient[] ingredientlist= new Ingredient[2];
-        Item fuckwaterbucket = Items.LAVA_BUCKET;
+        Item fuckwaterbucket = Items.WATER_BUCKET;
         fuckwaterbucket.setContainerItem(null);
         ingredientlist[0] = Ingredient.fromItem(fuckwaterbucket);
         ingredientlist[1] = Ingredient.fromItem(ItemsRegistry.TEA);
